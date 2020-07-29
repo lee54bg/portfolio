@@ -12,12 +12,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeftIcon';
-import ChevronRightIcon from '@material-ui/icons/ChevronRightIcon';
-import MenuIcon from '@material-ui/icons/MenuIcon';
-import Apps from '@material-ui/icons/Apps';
-import ContactMail from '@material-ui/icons/ContactMail';
-import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu';
+import AppsIcon from '@material-ui/icons/Apps';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import InboxIcon from '@material-ui/icons/Inbox';
+import MailIcon from '@material-ui/icons/Mail';
+
 
 import Header from './Header';
 
@@ -87,21 +90,18 @@ const useStyles = makeStyles((theme) => ({
 
 const menuItems = [
   {
-    listIcon: <Home />,
-    listText: "Home"
-  }, {
-    listIcon: <AssignmentInd />,
+    listIcon: <AssignmentIndIcon />,
     listText: "Resume"
   }, {
-    listIcon: <Apps />,
+    listIcon: <AppsIcon />,
     listText: "Portfolio"
   }, {
-    listIcon: <ContactMail />,
+    listIcon: <ContactMailIcon />,
     listText: "Contact"
   },
 ]
 
-export default function Home() {
+const Home = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -115,6 +115,7 @@ export default function Home() {
   };
 
   return (
+    <>
     <div className={classes.root}>
       <Header />
       <CssBaseline />
@@ -160,14 +161,12 @@ export default function Home() {
           </IconButton>
         </div>
         <List>
-          {menuItems.map((lstItm, index) => (
-            <ListItem button key={lstItm.listText} onClick={handleDrawerClose}>
+          {menuItems.map((lstItm, key) => (
+            <ListItem button key={key} onClick={handleDrawerClose}>
               <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
               <ListItemText primary={lstItm.listText} />
             </ListItem>
           ))}
-
-
 
           {/* {['About', 'Portfolio', 'Contact'].map((text, index) => (
             <ListItem button key={text} onClick={handleDrawerClose}>
@@ -175,7 +174,6 @@ export default function Home() {
               <ListItemText primary={text} />
             </ListItem>
           ))} */}
-
         </List>
       </Drawer>
       <main className={classes.content}>
@@ -183,5 +181,8 @@ export default function Home() {
         {/* Insert Typography Here */}
       </main>
     </div>
+    </>
   );
 }
+
+export default Home;
