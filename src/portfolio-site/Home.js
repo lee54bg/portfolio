@@ -7,16 +7,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeftIcon';
+import ChevronRightIcon from '@material-ui/icons/ChevronRightIcon';
+import MenuIcon from '@material-ui/icons/MenuIcon';
+import Apps from '@material-ui/icons/Apps';
+import ContactMail from '@material-ui/icons/ContactMail';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
+
 import Header from './Header';
 
 const drawerWidth = 240;
@@ -83,6 +85,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const menuItems = [
+  {
+    listIcon: <Home />,
+    listText: "Home"
+  }, {
+    listIcon: <AssignmentInd />,
+    listText: "Resume"
+  }, {
+    listIcon: <Apps />,
+    listText: "Portfolio"
+  }, {
+    listIcon: <ContactMail />,
+    listText: "Contact"
+  },
+]
+
 export default function Home() {
   const classes = useStyles();
   const theme = useTheme();
@@ -142,12 +160,22 @@ export default function Home() {
           </IconButton>
         </div>
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+          {menuItems.map((lstItm, index) => (
+            <ListItem button key={lstItm.listText} onClick={handleDrawerClose}>
+              <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
+              <ListItemText primary={lstItm.listText} />
+            </ListItem>
+          ))}
+
+
+
+          {/* {['About', 'Portfolio', 'Contact'].map((text, index) => (
+            <ListItem button key={text} onClick={handleDrawerClose}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
-          ))}
+          ))} */}
+
         </List>
       </Drawer>
       <main className={classes.content}>
