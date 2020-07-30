@@ -21,9 +21,17 @@ const drawerWidth = 500;
 
 const projectDetails = [
   {
-    projectName: "",
-    projectDetails: "",
-    projectImage: "",
+    projectName: "Project 1",
+    projectDetails: "Project 1",
+    projectImage: project1,
+  }, {
+    projectName: "Project 2",
+    projectDetails: "Project 2",
+    projectImage: project2,
+  }, {
+    projectName: "Project 3",
+    projectDetails: "Project 3",
+    projectImage: project1,
   }
 ];
 
@@ -31,12 +39,17 @@ const useStyles = makeStyles({
   mainContainer: {
     background: "#233",
     height: "100%",
+    left: 1000,
+    color: "Yellow"
   },
   cardContainer: {
-    maxWidth: 1000,
+    width: 400,
   },
   projectContainer: {
     paddingLeft: 100,
+  },
+  pro: {
+    color: "Yellow"
   }
 });
 
@@ -44,26 +57,28 @@ function Portfolio() {
   const classes = useStyles();
 
   return (
-    <Box component="div" className="classes.mainContainer">
+    <>
+    <div
+      className="classes.mainContainer"
+    >
       <NavBar />
-      <Grid container justify="center">
-        {/* Project 1 */}
-        <Grid item xs={3}>
-          <Grid container justify="center" spacing={2}>
+      <Grid container spacing={8} justify="center">
+        {projectDetails.map((projectItem, key) => (
+          <Grid key={key} item>
             <Card className={classes.cardContainer}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   alt="Project 1"
                   height="140"
-                  image={project1}
+                  image={projectItem.projectImage}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="5">
-                    Project 1
+                  <Typography gutterBottom variant="5" className="classes.pro">
+                    {projectItem.projectName}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                    Project 1
+                  {projectItem.projectDetails}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -76,75 +91,11 @@ function Portfolio() {
                 </CardActions>
               </CardActionArea>
             </Card>
-          </Grid>
-        </Grid>
-
-        {/* Project 2 */}
-        <Grid item xs={3}>
-          <Grid container justify="center" spacing={2}>
-            <Card className={classes.cardContainer}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Project 2"
-                  height="140"
-                  image={project2}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="5">
-                    Project 2
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Project 2
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Live Demo
-                  </Button>
-                </CardActions>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
-
-        {/* Project 3 */}
-        <Grid item xs={3}>
-          <Grid container justify="center" spacing={2}>
-            <Card className={classes.cardContainer}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Project 1"
-                  height="140"
-                  image={project1}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="5">
-                    Project 1
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Project 1
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Live Demo
-                  </Button>
-                </CardActions>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
-
+          </Grid>        
+        ))}
       </Grid>
-    </Box>
+    </div>
+    </>
   );
 }
 
