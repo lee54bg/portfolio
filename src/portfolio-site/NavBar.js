@@ -20,8 +20,6 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
 
-import Header from './Header';
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({

@@ -8,7 +8,6 @@ import Portfolio from './portfolio-site/Portfolio.js';
 
 import { Route } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
 import { Switch } from 'react-router-dom';
 
 function App() {

@@ -17,8 +17,6 @@ import {
 import project1 from '../images/html-css-javascript-lg.jpg';
 import project2 from '../images/javascript-fullstack.jpg';
 
-const drawerWidth = 500;
-
 const projectDetails = [
   {
     projectName: "Project 1",
@@ -35,13 +33,12 @@ const projectDetails = [
   }
 ];
 
+const portfolioStyle = {
+  width: '90%',
+  marginLeft: '10%',
+};
+
 const useStyles = makeStyles({
-  mainContainer: {
-    background: "#233",
-    height: "100%",
-    left: 1000,
-    color: "Yellow"
-  },
   cardContainer: {
     width: 400,
   },
@@ -57,9 +54,8 @@ function Portfolio() {
   const classes = useStyles();
 
   return (
-    <>
-    <div
-      className="classes.mainContainer"
+    <Box
+      style={portfolioStyle}
     >
       <NavBar />
       <Grid container spacing={8} justify="center">
@@ -74,14 +70,15 @@ function Portfolio() {
                   image={projectItem.projectImage}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="5" className="classes.pro">
+                  <Typography gutterBottom variant="h5" className="classes.pro">
                     {projectItem.projectName}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
                   {projectItem.projectDetails}
                   </Typography>
                 </CardContent>
-                <CardActions>
+              </CardActionArea>
+              <CardActions>
                   <Button size="small" color="primary">
                     Share
                   </Button>
@@ -89,13 +86,11 @@ function Portfolio() {
                     Live Demo
                   </Button>
                 </CardActions>
-              </CardActionArea>
             </Card>
           </Grid>        
         ))}
       </Grid>
-    </div>
-    </>
+    </Box>
   );
 }
 
