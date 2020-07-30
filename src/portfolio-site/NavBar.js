@@ -7,16 +7,20 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu';
+import AppsIcon from '@material-ui/icons/Apps';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import { Link } from 'react-router-dom';
+
+import Header from './Header';
 
 const drawerWidth = 240;
 
@@ -82,7 +86,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar() {
+const menuItems = [
+  {
+    listIcon: <AssignmentIndIcon />,
+    listText: "About",
+    listPath: "/about"
+  }, {
+    listIcon: <AppsIcon />,
+    listText: "Portfolio",
+    listPath: "/portfolio"
+  }, {
+    listIcon: <ContactMailIcon />,
+    listText: "Contact",
+    listPath: "/contact"
+  }
+]
+
+const NavBar = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -96,6 +116,7 @@ export default function NavBar() {
   };
 
   return (
+    <>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -139,23 +160,17 @@ export default function NavBar() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          {menuItems.map((lstItm, key) => (
+            <ListItem button key={key} onClick={handleDrawerClose} component={Link} to={lstItm.listPath}>
+              <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
+              <ListItemText primary={lstItm.listText} />
             </ListItem>
           ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button onClick={handleDrawerClose}>
+            <ListItemIcon><ContactMailIcon /></ListItemIcon>
+            <ListItemText primary="Resume" />
+          </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
@@ -163,5 +178,8 @@ export default function NavBar() {
         {/* Insert Typography Here */}
       </main>
     </div>
+    </>
   );
 }
+
+export default NavBar;

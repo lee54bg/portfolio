@@ -18,9 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AppsIcon from '@material-ui/icons/Apps';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import InboxIcon from '@material-ui/icons/Inbox';
-import MailIcon from '@material-ui/icons/Mail';
-
+import { Link } from 'react-router-dom';
 
 import Header from './Header';
 
@@ -91,14 +89,17 @@ const useStyles = makeStyles((theme) => ({
 const menuItems = [
   {
     listIcon: <AssignmentIndIcon />,
-    listText: "Resume"
+    listText: "About",
+    listPath: "/about"
   }, {
     listIcon: <AppsIcon />,
-    listText: "Portfolio"
+    listText: "Portfolio",
+    listPath: "/portfolio"
   }, {
     listIcon: <ContactMailIcon />,
-    listText: "Contact"
-  },
+    listText: "Contact",
+    listPath: "/contact"
+  }
 ]
 
 const Home = () => {
@@ -137,9 +138,8 @@ const Home = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
+          {/* <Typography variant="h6" noWrap>
+          </Typography> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -162,18 +162,15 @@ const Home = () => {
         </div>
         <List>
           {menuItems.map((lstItm, key) => (
-            <ListItem button key={key} onClick={handleDrawerClose}>
+            <ListItem button key={key} onClick={handleDrawerClose} component={Link} to={lstItm.listPath}>
               <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
               <ListItemText primary={lstItm.listText} />
             </ListItem>
           ))}
-
-          {/* {['About', 'Portfolio', 'Contact'].map((text, index) => (
-            <ListItem button key={text} onClick={handleDrawerClose}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
+          <ListItem button onClick={handleDrawerClose}>
+            <ListItemIcon><ContactMailIcon /></ListItemIcon>
+            <ListItemText primary="Resume" />
+          </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
