@@ -13,10 +13,16 @@ import {
 
 import NavBar from './NavBar.js';
 
-
+const useStyles = makeStyles((theme) => ({
+  form: {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    position: "absolute"
+  },
+}));
 
 const portfolioStyle = {
-  width: '90%',
   marginLeft: '10%',
 };
 
@@ -42,13 +48,14 @@ const InputField = withStyles({
   },
 })(TextField);
 
-
 function Contact() {
+  const classes = useStyles();
+
   return (
     <Box style={portfolioStyle}>
         <NavBar />
         <Grid container justify="center">
-        <Box component="form">
+        <Box component="form" className={classes.form}>
           <Typography variant="h5">
             Hire or contact me...
           </Typography>
@@ -59,21 +66,25 @@ function Contact() {
             margin="dense"
             size="medium"
             />
+          <br/>
           <InputField 
             fullWidth={true} 
             label="Email Address" 
             variant="outlined"
             margin="dense"
             size="medium"/>
+          <br/>
           <InputField fullWidth={true} label="Subject" variant="outlined"
             margin="dense"
             size="medium"/>
+          <br/>
           <InputField
             fullWidth={true}
             label="Message"
             variant="outlined"
             margin="dense"
             size="medium"/>
+          <br/>
           <Button variant="outlined" fullWidth={true} endIcon={<SendIcon />}>
             Contact Me
           </Button>
