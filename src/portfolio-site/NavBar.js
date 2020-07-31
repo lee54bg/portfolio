@@ -27,19 +27,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    marginLeft: drawerWidth,
   },
   menuButton: {
     marginRight: 36,
@@ -51,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+  },
+  drawerPaper: {
+    width: drawerWidth,
   },
   drawerOpen: {
     width: drawerWidth,
@@ -88,15 +80,18 @@ const menuItems = [
   {
     listIcon: <AssignmentIndIcon />,
     listText: "About",
-    listPath: "/about"
+    listPath: "/about",
+    buttonColor: "#b3e5fc"
   }, {
     listIcon: <AppsIcon />,
     listText: "Portfolio",
-    listPath: "/portfolio"
+    listPath: "/portfolio",
+    buttonColor: "#00acc1",
   }, {
     listIcon: <ContactMailIcon />,
     listText: "Contact",
-    listPath: "/contact"
+    listPath: "/contact",
+    buttonColor: "#9575cd",
   }
 ]
 
@@ -105,67 +100,30 @@ const NavBar = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Drawer
         variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
+        className={classes.drawer}
         classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
+          paper: classes.drawerPaper,
         }}
       >
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
+          {/* <IconButton>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+          </IconButton> */}
         </div>
         <List>
           {menuItems.map((lstItm, key) => (
-            <ListItem button key={key} onClick={handleDrawerClose} component={Link} to={lstItm.listPath}>
+            <ListItem button key={key} component={Link} to={lstItm.listPath} >
               <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
               <ListItemText primary={lstItm.listText} />
             </ListItem>
           ))}
-          <ListItem button onClick={handleDrawerClose}>
+          <ListItem button>
             <ListItemIcon><ContactMailIcon /></ListItemIcon>
             <ListItemText primary="Resume" />
           </ListItem>

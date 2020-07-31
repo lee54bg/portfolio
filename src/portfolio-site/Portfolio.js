@@ -11,11 +11,14 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typography
+  Typography,
+  Zoom
 } from '@material-ui/core';
 
 import project1 from '../images/html-css-javascript-lg.jpg';
 import project2 from '../images/javascript-fullstack.jpg';
+
+const drawerWidth = 240;
 
 const projectDetails = [
   {
@@ -34,8 +37,9 @@ const projectDetails = [
 ];
 
 const portfolioStyle = {
-  width: '90%',
-  marginLeft: '10%',
+  backgroundColor: 'tan',
+  width: `calc(100% - ${drawerWidth}px)`,
+  marginLeft: drawerWidth,
 };
 
 const useStyles = makeStyles({
@@ -61,33 +65,33 @@ function Portfolio() {
       <Grid container spacing={8} justify="center">
         {projectDetails.map((projectItem, key) => (
           <Grid key={key} item>
-            <Card className={classes.cardContainer}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Project 1"
-                  height="140"
-                  image={projectItem.projectImage}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" className="classes.pro">
-                    {projectItem.projectName}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                  {projectItem.projectDetails}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    Live Demo
-                  </Button>
-                </CardActions>
-            </Card>
-          </Grid>        
+              <Card className={classes.cardContainer}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="Project 1"
+                    height="140"
+                    image={projectItem.projectImage}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" className="classes.pro">
+                      {projectItem.projectName}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                    {projectItem.projectDetails}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">
+                      Share
+                    </Button>
+                    <Button size="small" color="primary">
+                      Live Demo
+                    </Button>
+                  </CardActions>
+              </Card>
+          </Grid>
         ))}
       </Grid>
     </Box>

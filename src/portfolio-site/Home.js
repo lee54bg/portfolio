@@ -6,20 +6,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MenuIcon from '@material-ui/icons/Menu';
 import AppsIcon from '@material-ui/icons/Apps';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
 
-import Header from './Header';
+import NavBar from './NavBar.js';
+import Header from './Header.js';
 
 const drawerWidth = 240;
 
@@ -28,11 +21,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -52,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+  },
+  drawerPaper: {
+    width: drawerWidth,
   },
   drawerOpen: {
     width: drawerWidth,
@@ -85,97 +78,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const menuItems = [
-  {
-    listIcon: <AssignmentIndIcon />,
-    listText: "About",
-    listPath: "/about"
-  }, {
-    listIcon: <AppsIcon />,
-    listText: "Portfolio",
-    listPath: "/portfolio"
-  }, {
-    listIcon: <ContactMailIcon />,
-    listText: "Contact",
-    listPath: "/contact"
-  }
-]
-
 const Home = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
     <div className={classes.root}>
       <Header />
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* <Typography variant="h6" noWrap>
-          </Typography> */}
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <List>
-          {menuItems.map((lstItm, key) => (
-            <ListItem button key={key} onClick={handleDrawerClose} component={Link} to={lstItm.listPath}>
-              <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
-              <ListItemText primary={lstItm.listText} />
-            </ListItem>
-          ))}
-          <ListItem button onClick={handleDrawerClose}>
-            <ListItemIcon><ContactMailIcon /></ListItemIcon>
-            <ListItemText primary="Resume" />
-          </ListItem>
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {/* Insert Typography Here */}
-      </main>
+      <NavBar />
     </div>
     </>
   );
