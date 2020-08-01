@@ -11,6 +11,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import {
+  Badge,
+  Grid,
   IconButton,
   Paper,
   Tab,
@@ -18,10 +20,23 @@ import {
   Tooltip,
 } from '@material-ui/core';
 
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import AppsIcon from '@material-ui/icons/Apps';
 import MenuIcon from '@material-ui/icons/Menu';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
+import SaveIcon from '@material-ui/icons/Save';
+import PrintIcon from '@material-ui/icons/Print';
+import ShareIcon from '@material-ui/icons/Share';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import CloseIcon from '@material-ui/icons/Close';
+
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 70;
@@ -29,6 +44,9 @@ const drawerWidth = 70;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+  },
+  grow: {
+    flexGrow: 1,
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -52,7 +70,24 @@ const useStyles = makeStyles((theme) => ({
     width: '640px',
     margin: '0 auto',
   },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  title: {
+    marginTop: '10px',
+  },
 }));
+
+const actions = [
+  { icon: <FileCopyIcon />, name: 'Copy' },
+  { icon: <SaveIcon />, name: 'Save' },
+  { icon: <PrintIcon />, name: 'Print' },
+  { icon: <ShareIcon />, name: 'Share' },
+  { icon: <FavoriteIcon />, name: 'Like' },
+];
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -83,53 +118,52 @@ const menuItems = [
 const NavBar = (props) => {
   const classes = useStyles();
   const theme = useTheme();
+  
+  const [open, setOpen] = React.useState(true);
+  const [hidden, setHidden] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar} style={{height: '80px'}}>
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Paper className={classes.tabs}>
-            <Tabs
-              indicatorColor="primary"
-              textColor="primary"
-              centered
-            >
-            {["Introduction", "Work Experience", "Skills"].map((text, key) => (
-              <Tab label={text} key={key}/>
-            ))}
-            </Tabs>
-          </Paper>
+          <Grid justify={"space-between"} container>
+            <Grid xs={1} item>
+              <div className={classes.sectionDesktop}>
+              <IconButton color="inherit" onClick={handleToggle}>
+                <CloseIcon />
+              </IconButton>
+              {open && (
+                menuItems.map((lstItm, key) => (
+                  <HtmlTooltip title={lstItm.listText} placement="down" key={key}>
+                    <IconButton color="inherit" component={Link} to={lstItm.listPath}>
+                      {lstItm.listIcon}
+                    </IconButton>
+                  </HtmlTooltip>
+                ))
+              )}
+              </div>
+            </Grid>
+            <Grid xs={7} item>
+              <Typography variant="h4" className={classes.title}>
+                News
+              </Typography>
+            </Grid>
+          </Grid>          
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
-        <List>
-          {menuItems.map((lstItm, key) => (
-            <HtmlTooltip title={lstItm.listText} placement="right" key={key}>
-              <ListItem component={Link} to={lstItm.listPath} >
-                <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
-                <ListItemText primary={lstItm.listText} />
-              </ListItem>
-            </HtmlTooltip>
-          ))}
-        </List>
-      </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {props.children}

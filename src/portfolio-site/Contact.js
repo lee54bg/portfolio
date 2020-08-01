@@ -16,14 +16,11 @@ import NavBar from './NavBar.js';
 const useStyles = makeStyles((theme) => ({
   form: {
     left: "50%",
-    transform: "translateX(-50%)",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
     position: "absolute"
   },
 }));
-
-const portfolioStyle = {
-  marginLeft: '10%',
-};
 
 const InputField = withStyles({
   root: {
@@ -78,45 +75,43 @@ function Contact() {
 
   return (
     <NavBar>
-      <Grid container justify="center">
-        <Box component="form" className={classes.form}>
-          <Typography variant="h5"
-            onMouseEnter={event => onMouseOver(event)}
-            onMouseOut={event => onMouseOut(event)}
-          >
-            Hire or contact me...
-          </Typography>
-          <InputField
-            fullWidth={true}
-            label="Full Name" 
-            variant="outlined"
-            margin="dense"
-            size="medium"
-            />
-          <br/>
-          <InputField 
-            fullWidth={true} 
-            label="Email Address" 
-            variant="outlined"
-            margin="dense"
-            size="medium"/>
-          <br/>
-          <InputField fullWidth={true} label="Subject" variant="outlined"
-            margin="dense"
-            size="medium"/>
-          <br/>
-          <InputField
-            fullWidth={true}
-            label="Message"
-            variant="outlined"
-            margin="dense"
-            size="medium"/>
-          <br/>
-          <Button variant="outlined" fullWidth={true} endIcon={<SendIcon />}>
-            Contact Me
-          </Button>
-        </Box>
-      </Grid>
+      <Box component="div" className={classes.form}>
+        <Typography variant="h5"
+          onMouseEnter={event => onMouseOver(event)}
+          onMouseOut={event => onMouseOut(event)}
+        >
+          Hire or contact me...
+        </Typography>
+        <InputField
+          fullWidth={true}
+          label="Full Name" 
+          variant="outlined"
+          margin="dense"
+          size="large"
+          />
+        <br/>
+        <InputField 
+          fullWidth={true} 
+          label="Email Address" 
+          variant="outlined"
+          margin="dense"
+          size="large"/>
+        <br/>
+        <InputField fullWidth={true} label="Subject" variant="outlined"
+          margin="dense"
+          size="large"/>
+        <br/>
+        <InputField
+          fullWidth={true}
+          label="Message"
+          variant="outlined"
+          margin="dense"
+          size="large"/>
+        <br/>
+        <Button variant="outlined" fullWidth={true} endIcon={<SendIcon />}>
+          Contact Me
+        </Button>
+      </Box>
     </NavBar>
   );
 }
