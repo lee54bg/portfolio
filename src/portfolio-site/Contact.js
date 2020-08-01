@@ -15,9 +15,8 @@ import NavBar from './NavBar.js';
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)",
+    transform: "translateX(-50%)",
     position: "absolute"
   },
 }));
@@ -78,9 +77,8 @@ function Contact() {
   const classes = useStyles();
 
   return (
-    <Box style={portfolioStyle}>
-        <NavBar />
-        <Grid container justify="center">
+    <NavBar>
+      <Grid container justify="center">
         <Box component="form" className={classes.form}>
           <Typography variant="h5"
             onMouseEnter={event => onMouseOver(event)}
@@ -118,8 +116,8 @@ function Contact() {
             Contact Me
           </Button>
         </Box>
-        </Grid>
-    </Box>
+      </Grid>
+    </NavBar>
   );
 }
 

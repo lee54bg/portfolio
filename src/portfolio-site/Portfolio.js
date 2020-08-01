@@ -58,10 +58,7 @@ function Portfolio() {
   const classes = useStyles();
 
   return (
-    <Box
-      style={portfolioStyle}
-    >
-      <NavBar />
+    <NavBar>
       <Grid container spacing={8} justify="center">
         {projectDetails.map((projectItem, key) => (
           <Grid key={key} item>
@@ -93,8 +90,8 @@ function Portfolio() {
               </Card>
           </Grid>
         ))}
-      </Grid>
-    </Box>
+      </Grid>      
+    </NavBar>
   );
 }
 
