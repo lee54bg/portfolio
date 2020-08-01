@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,12 +10,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import {
+  IconButton,
+  Paper,
+  Tab,
+  Tabs,
+  Tooltip,
+} from '@material-ui/core';
+
 import AppsIcon from '@material-ui/icons/Apps';
+import MenuIcon from '@material-ui/icons/Menu';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { Link } from 'react-router-dom';
 
-const drawerWidth = 200;
+const drawerWidth = 70;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,24 +48,35 @@ const useStyles = makeStyles((theme) => ({
     width: `calc(100% - ${drawerWidth}px)`,
     padding: theme.spacing(3),
   },
+  tabs: {
+    width: '640px',
+    margin: '0 auto',
+  },
 }));
+
+const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(15),
+    border: '1px solid #dadde9',
+  },
+}))(Tooltip);
 
 const menuItems = [
   {
     listIcon: <AssignmentIndIcon />,
     listText: "About",
     listPath: "/about",
-    buttonColor: "#b3e5fc"
   }, {
     listIcon: <AppsIcon />,
     listText: "Portfolio",
     listPath: "/portfolio",
-    buttonColor: "#00acc1",
   }, {
     listIcon: <ContactMailIcon />,
     listText: "Contact",
     listPath: "/contact",
-    buttonColor: "#9575cd",
   }
 ]
 
@@ -67,11 +87,27 @@ const NavBar = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar} style={{height: '80px'}}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
-            Permanent drawer
-          </Typography>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Paper className={classes.tabs}>
+            <Tabs
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+            {["Introduction", "Work Experience", "Skills"].map((text, key) => (
+              <Tab label={text} key={key}/>
+            ))}
+            </Tabs>
+          </Paper>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -85,15 +121,13 @@ const NavBar = (props) => {
         <div className={classes.toolbar} />
         <List>
           {menuItems.map((lstItm, key) => (
-            <ListItem button key={key} component={Link} to={lstItm.listPath} >
-              <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
-              <ListItemText primary={lstItm.listText} />
-            </ListItem>
+            <HtmlTooltip title={lstItm.listText} placement="right" key={key}>
+              <ListItem component={Link} to={lstItm.listPath} >
+                <ListItemIcon>{lstItm.listIcon}</ListItemIcon>
+                <ListItemText primary={lstItm.listText} />
+              </ListItem>
+            </HtmlTooltip>
           ))}
-          <ListItem button>
-            <ListItemIcon><ContactMailIcon /></ListItemIcon>
-            <ListItemText primary="Resume" />
-          </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
