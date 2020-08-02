@@ -17,6 +17,7 @@ import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
 const drawerWidth = 240;
 
@@ -46,6 +47,9 @@ const useStyles = makeStyles({
   timeLineCard: {
     height: '300px',
     width: '100%',
+  },
+  timeLine: {
+    marginRight: '260px',
   }
 });
 
@@ -77,10 +81,17 @@ function About() {
 // Back to Top
   return (
     <NavBar>
-      <Timeline align="alternate">
+      <Paper className={classes.tabs}>
+        
+      </Paper>
+
+      <Timeline className={classes.timeLine}>
         {timeLine.map((expItem, key) => (
           <TimelineItem key={key}>
-            <TimelineSeparator style={{height: '500px'}}>
+            <TimelineOppositeContent>
+              <Typography variant="h4">{expItem.jobTitle}</Typography>
+            </TimelineOppositeContent>
+            <TimelineSeparator style={{height: '400px', }}>
               <TimelineDot />
               <TimelineConnector />
             </TimelineSeparator>

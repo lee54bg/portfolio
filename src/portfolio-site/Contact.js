@@ -10,7 +10,7 @@ import {
   Box, 
   withStyles
 } from '@material-ui/core'
-
+import { sizing } from '@material-ui/system';
 import NavBar from './NavBar.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,8 +18,13 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     top: "50%",
     transform: "translate(-50%, -50%)",
-    position: "absolute"
+    position: "absolute",
+    width: '500px',
   },
+  messageForm: {
+    height: '150px',
+    width: '250px'
+  }
 }));
 
 const InputField = withStyles({
@@ -69,6 +74,8 @@ const onMouseOut = event => {
   el.style.color = black;
 };
 
+// height of the TextField
+const height = 200;
 
 function Contact() {
   const classes = useStyles();
@@ -102,13 +109,21 @@ function Contact() {
           size="large"/>
         <br/>
         <InputField
-          fullWidth={true}
+          fullWidth={true} 
           label="Message"
           variant="outlined"
           margin="dense"
-          size="large"/>
+          size="large"
+          multiline
+          /* styles the input component */
+          inputProps={{
+            style: {
+              height,
+            },
+          }}
+        />
         <br/>
-        <Button variant="outlined" fullWidth={true} endIcon={<SendIcon />}>
+        <Button variant="contained" endIcon={<SendIcon />} color="primary">
           Contact Me
         </Button>
       </Box>

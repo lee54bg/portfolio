@@ -4,6 +4,7 @@ import NavBar from './NavBar.js';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
+  Chip,
   Grid,
   Card,
   CardActionArea,
@@ -74,7 +75,7 @@ const portfolioStyle = {
   marginLeft: drawerWidth,
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   cardContainer: {
     width: 400,
   },
@@ -83,8 +84,15 @@ const useStyles = makeStyles({
   },
   pro: {
     color: "Yellow"
-  }
-});
+  },
+  chipArea: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+  },
+}));
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -141,7 +149,7 @@ function Portfolio() {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {[...new Array(50)]
+            {[...new Array(5)]
               .map(
                 () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
@@ -150,6 +158,11 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
               )
               .join('\n')}
           </DialogContentText>
+          <div className={classes.chipArea}>
+            <Chip label="Basic" />
+            <Chip label="Basic" />
+            <Chip label="Basic" />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
