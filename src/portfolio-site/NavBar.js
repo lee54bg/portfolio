@@ -11,14 +11,20 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import {
+  Fab,
   Badge,
   Grid,
+  Grow,
   IconButton,
   Paper,
   Tab,
   Tabs,
   Tooltip,
+  useScrollTrigger,
+  Zoom
 } from '@material-ui/core';
+
+import PropTypes from 'prop-types';
 
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
@@ -37,6 +43,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
 
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 70;
@@ -44,6 +52,7 @@ const drawerWidth = 70;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    height: '770px',
   },
   grow: {
     flexGrow: 1,
@@ -78,7 +87,13 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: '10px',
+    margin: '0 auto',
   },
+  scrollToTop: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  }
 }));
 
 const actions = [
@@ -115,6 +130,67 @@ const menuItems = [
   }
 ]
 
+const TimeText = () => {
+  const classes = useStyles();
+
+  let time = new Date().toLocaleTimeString();
+
+  const [ctime, setCtime] = React.useState(time);
+  
+  const UpdateTime = () => {
+    time = new Date().toLocaleTimeString();
+    setCtime(time)
+  };
+  
+  setInterval(UpdateTime, 1000)
+  
+  return (
+    <>
+      <Typography variant="h4" className={classes.title}>
+        {ctime}
+      </Typography>
+    </>
+  );      
+};
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  const classes = useStyles();
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.scrollToTop}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
 const NavBar = (props) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -122,7 +198,8 @@ const NavBar = (props) => {
   const [open, setOpen] = React.useState(true);
   const [hidden, setHidden] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  
+  const [appDrawerButtons, setAppButtons] = React.useState(true);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -134,39 +211,36 @@ const NavBar = (props) => {
   const handleToggle = () => {
     setOpen(!open);
   };
-
+  // https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar position="fixed">
         <Toolbar>
-          <Grid justify={"space-between"} container>
-            <Grid xs={1} item>
-              <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" onClick={handleToggle}>
-                <CloseIcon />
-              </IconButton>
-              {open && (
-                menuItems.map((lstItm, key) => (
-                  <HtmlTooltip title={lstItm.listText} placement="down" key={key}>
-                    <IconButton color="inherit" component={Link} to={lstItm.listPath}>
-                      {lstItm.listIcon}
-                    </IconButton>
-                  </HtmlTooltip>
-                ))
-              )}
-              </div>
-            </Grid>
-            <Grid xs={7} item>
-              <Typography variant="h4" className={classes.title}>
-                News
-              </Typography>
-            </Grid>
-          </Grid>          
+          <Typography variant="h4" className={classes.title}>
+            News
+          </Typography>
+          <div className={classes.sectionDesktop}>
+            {
+              menuItems.map((lstItm, key) => (
+                <HtmlTooltip title={lstItm.listText} placement="down" key={key}>
+                  <IconButton color="inherit" component={Link} to={lstItm.listPath}>
+                    {lstItm.listIcon}
+                  </IconButton>
+                </HtmlTooltip>
+              ))
+            }
+          </div>
         </Toolbar>
       </AppBar>
+      <Toolbar id="back-to-top-anchor"/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {props.children}
+        <ScrollTop {...props}>
+          <Fab color="secondary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
       </main>
     </div>
   );

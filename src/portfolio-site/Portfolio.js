@@ -173,7 +173,10 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
           </Button>
         </DialogActions>
       </Dialog>
-      <Grid container spacing={8} justify="center">
+      <Box>
+
+      </Box>
+      <Grid container spacing={8} justify="center" >
         {projectDetails.map((projectItem, key) => (
           <Grid key={key} item>
               <Card className={classes.cardContainer}>

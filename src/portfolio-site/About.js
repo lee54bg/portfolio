@@ -3,12 +3,14 @@ import NavBar from './NavBar.js';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  AppBar,
+  Fab,
   Paper,
   Tab,
   Tabs,
   Toolbar,
   Typography,
+  useScrollTrigger,
+  Zoom
 } from '@material-ui/core';
 
 import Timeline from '@material-ui/lab/Timeline';
@@ -18,6 +20,8 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+
+import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
@@ -45,12 +49,17 @@ const useStyles = makeStyles({
     margin: '0 auto',
   },
   timeLineCard: {
-    height: '300px',
-    width: '100%',
+    height: '350px',
+    width: '800px',
   },
   timeLine: {
-    marginRight: '260px',
-  }
+    marginRight: '200px',
+  },
+  tabs: {
+    width: '500px',
+    margin: '0 auto',
+    marginTop: '-50px'
+  },
 });
 
 const timeLine = [
@@ -70,7 +79,8 @@ const timeLine = [
 ];
 
 
-function About() {
+
+function About(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -81,10 +91,20 @@ function About() {
 // Back to Top
   return (
     <NavBar>
-      <Paper className={classes.tabs}>
-        
+      <Paper square className={classes.tabs}>
+        <Tabs
+          value={value}
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={handleChange}
+          aria-label="disabled tabs example"
+          centered
+        >
+          <Tab label="Active" />
+          <Tab label="Disabled" />
+          <Tab label="Active" />
+        </Tabs>
       </Paper>
-
       <Timeline className={classes.timeLine}>
         {timeLine.map((expItem, key) => (
           <TimelineItem key={key}>

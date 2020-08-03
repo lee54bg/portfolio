@@ -12,7 +12,7 @@ import { Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <>
+    <div className="App-header">
       <CssBaseline />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -20,7 +20,7 @@ function App() {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/portfolio" component={Portfolio} />
       </Switch>
-    </>
+    </div>
   );
 }
 

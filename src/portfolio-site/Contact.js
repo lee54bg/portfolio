@@ -24,29 +24,14 @@ const useStyles = makeStyles((theme) => ({
   messageForm: {
     height: '150px',
     width: '250px'
+  },
+  contactMsg: {
+    borderStyle: 'none none solid none',
+    marginBottom: '40px'
   }
 }));
 
 const InputField = withStyles({
-  root: {
-    "& label.Mui-focused": {
-      color: "tomato",
-    },
-    "& label": {
-      color: "tan",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "tan",
-      },
-      "&:hover fieldset": {
-        borderColor: "tan",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "tan",
-      }
-    },
-  },
 })(TextField);
 
 const onMouseOver = event => {
@@ -83,12 +68,11 @@ function Contact() {
   return (
     <NavBar>
       <Box component="div" className={classes.form}>
-        <Typography variant="h5"
-          onMouseEnter={event => onMouseOver(event)}
-          onMouseOut={event => onMouseOut(event)}
-        >
-          Hire or contact me...
-        </Typography>
+        <div className={classes.contactMsg}>
+          <Typography variant="h4">
+            Contact Me
+          </Typography>
+        </div>
         <InputField
           fullWidth={true}
           label="Full Name" 
