@@ -46,6 +46,11 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+import WorkIcon from '@material-ui/icons/Work';
+import BuildIcon from '@material-ui/icons/Build';
+import SchoolIcon from '@material-ui/icons/School';
+
+
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 70;
@@ -58,8 +63,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    // width: `calc(100% - ${drawerWidth}px)`,
+    // marginLeft: drawerWidth,
+    alignItems: 'center',
   },
   drawer: {
     width: drawerWidth,
@@ -111,20 +117,24 @@ const menuItems = [
   {
     listIcon: <HomeIcon />,
     listText: "Home",
-    listPath: "/home",
+    listPath: "/",
+    // listFunction: titleHome,
   },
   {
     listIcon: <AssignmentIndIcon />,
     listText: "About",
     listPath: "/about",
+    // listFunction: titleAbout,
   }, {
     listIcon: <AppsIcon />,
     listText: "Portfolio",
     listPath: "/portfolio",
+    // listFunction: titlePortfolio,
   }, {
     listIcon: <ContactMailIcon />,
     listText: "Contact",
     listPath: "/contact",
+    // listFunction: titleContact,
   }
 ]
 
@@ -197,6 +207,7 @@ const NavBar = (props) => {
   const [hidden, setHidden] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [appDrawerButtons, setAppButtons] = React.useState(true);
+  const [title, setTitle] = React.useState('Home');
 
   const handleClose = () => {
     setOpen(false);
@@ -209,6 +220,27 @@ const NavBar = (props) => {
   const handleToggle = () => {
     setOpen(!open);
   };
+
+  const titleHome = () => {
+    setTitle('')
+  }
+
+  const titleAbout = () => {
+    setTitle('About')
+  }
+
+  const titlePortfolio = () => {
+    setTitle('Portfolio')
+  }
+
+  const titleContact = () => {
+    setTitle('Contact')
+  }
+
+  const handleTitle = (value) => {
+    setTitle(value)
+  }
+
   // https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/
   return (
     <div className={classes.root}>
@@ -216,12 +248,12 @@ const NavBar = (props) => {
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
-            News
+            {title}
           </Typography>
             {
               menuItems.map((lstItm, key) => (
                 <HtmlTooltip title={lstItm.listText} placement="down" key={key}>
-                  <IconButton color="inherit" component={Link} to={lstItm.listPath}>
+                  <IconButton color="inherit" component={Link} to={lstItm.listPath} >
                     {lstItm.listIcon}
                   </IconButton>
                 </HtmlTooltip>

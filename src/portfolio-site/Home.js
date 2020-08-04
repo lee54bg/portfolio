@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   Button,
   CssBaseline, 
+  Fade,
   Grid,
   Typography,
 } from '@material-ui/core';
@@ -10,7 +11,6 @@ import {
 import Typed from 'react-typed';
 
 import NavBar from './NavBar.js';
-import Header from './Header.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,13 +27,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   return (
     <>
       <div className={classes.root}>
         <CssBaseline />
         <NavBar />
-        <div>
+        <div>  
           <Grid
             className={classes.headerArea}
             container
@@ -42,23 +47,25 @@ const Home = () => {
             alignItems="center"
             spacing={1}
           >
+            <Fade in={checked}>
             <Grid item>
               <Typography variant="h2">
                 <Typed strings={["Brandon Lee"]} typeSpeed={40}/>
               </Typography>
             </Grid>
+            </Fade>
             <Grid item>
             <Typography variant="h4">
               <Typed
-                strings={["Aspiring Software Engineer", "Life-long Learner", "Focused Problem Solver"]}
-                typeSpeed={70}
+                strings={["Aspiring Software Engineer", "Life-Long Learner", "Focused Problem Solver"]}
+                typeSpeed={40}
                 backSpeed={60}
                 loop
               />
             </Typography>            
             </Grid>
             <Grid item className={classes.getStarted}>
-              <Button variant="contained">Get Started</Button>
+              <Button variant="contained" href="/about">Get Started</Button>
             </Grid>
           </Grid>
         </div>
