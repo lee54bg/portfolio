@@ -4,6 +4,7 @@ import NavBar from './NavBar.js';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Fab,
+  Grid,
   Paper,
   Tab,
   Tabs,
@@ -25,7 +26,7 @@ import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
   },
@@ -56,12 +57,21 @@ const useStyles = makeStyles({
     marginRight: '200px',
   },
   tabs: {
-    width: '500px',
+    width: '400px',
     margin: '0 auto',
-    marginTop: '-50px'
+    marginTop: '-60px'
   },
-});
+  introArea: {
+    marginTop: '30px',
+    height: '480px',
+    padding: theme.spacing(5),
+  },
+  introBody: {
+    marginTop: '26px'
+  }
+}));
 
+// Work experience goes here
 const timeLine = [
   {
     companyName: 'Forescout Technologies',
@@ -78,8 +88,6 @@ const timeLine = [
   }
 ];
 
-
-
 function About(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -87,8 +95,7 @@ function About(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-// Scroll = Paper
-// Back to Top
+
   return (
     <NavBar>
       <Paper square className={classes.tabs}>
@@ -100,16 +107,43 @@ function About(props) {
           aria-label="disabled tabs example"
           centered
         >
-          <Tab label="Active" />
-          <Tab label="Disabled" />
-          <Tab label="Active" />
+          <Tab label="Work Experience" />
+          <Tab label="Skills" />
         </Tabs>
       </Paper>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item xs={6}>
+          <Paper className={classes.introArea}>
+            <Typography variant="h3">
+              Brandon Lee
+            </Typography>
+            <Typography variant="h4">
+              Software Engineering Graduate
+            </Typography>
+            <Typography variant="body1" className={classes.introBody}>
+              Greetings, my name is Brandon.  I'm a Software Engineering Graduate seeking to further my skills in the industry.  I specialize in Networking Software
+              and also like to learn more about different types of tech on my own free time.
+            </Typography>
+            <Typography variant="body1" className={classes.introBody}>
+              I'm excited and passionate about being able to contribute my skills and efforts to not only help see the company grow but to also
+              further my career within the Software Engineering space.
+            </Typography>
+          </Paper>
+        </Grid>
+      </Grid>
+
       <Timeline className={classes.timeLine}>
         {timeLine.map((expItem, key) => (
           <TimelineItem key={key}>
             <TimelineOppositeContent>
-              <Typography variant="h4">{expItem.jobTitle}</Typography>
+              <Typography variant="h4">{expItem.companyName}</Typography>
+              <Typography variant="h5">{expItem.jobTitle}</Typography>
             </TimelineOppositeContent>
             <TimelineSeparator style={{height: '400px', }}>
               <TimelineDot />

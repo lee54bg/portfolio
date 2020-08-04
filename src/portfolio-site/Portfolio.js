@@ -4,6 +4,7 @@ import NavBar from './NavBar.js';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
+  Button,
   Chip,
   Grid,
   Card,
@@ -11,7 +12,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
+  Paper,
   Snackbar,
   Typography,
   Zoom
@@ -92,6 +93,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(0.5),
     },
   },
+  buttonRow: {
+    marginTop: '-60px',
+    marginBottom: '20px',
+  },
 }));
 
 function Alert(props) {
@@ -130,6 +135,43 @@ function Portfolio() {
 
   return (
     <NavBar>
+      <Grid
+        className={classes.buttonRow}
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+          <Button variant="contained">All</Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            React.js
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            Software-Defined Networks
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            CI/CD
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            Java
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            Python
+          </Button>
+        </Grid>
+      </Grid>
       <Snackbar open={snackBar} autoHideDuration={6000} onClose={snackBarClose}>
         <Alert onClose={snackBarClose} severity="success">
           This is a success message!
@@ -173,9 +215,6 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
           </Button>
         </DialogActions>
       </Dialog>
-      <Box>
-
-      </Box>
       <Grid container spacing={8} justify="center" >
         {projectDetails.map((projectItem, key) => (
           <Grid key={key} item>

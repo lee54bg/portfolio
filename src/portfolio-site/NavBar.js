@@ -42,6 +42,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
+import HomeIcon from '@material-ui/icons/Home';
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
@@ -51,8 +52,7 @@ const drawerWidth = 70;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    height: '770px',
+    flexGrow: 1,
   },
   grow: {
     flexGrow: 1,
@@ -72,7 +72,8 @@ const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    margin: '0 auto',
+    width: '100%',
     padding: theme.spacing(3),
   },
   tabs: {
@@ -87,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: '10px',
-    margin: '0 auto',
+    flexGrow: 1,
   },
   scrollToTop: {
     position: 'fixed',
@@ -95,14 +96,6 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
   }
 }));
-
-const actions = [
-  { icon: <FileCopyIcon />, name: 'Copy' },
-  { icon: <SaveIcon />, name: 'Save' },
-  { icon: <PrintIcon />, name: 'Print' },
-  { icon: <ShareIcon />, name: 'Share' },
-  { icon: <FavoriteIcon />, name: 'Like' },
-];
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -115,6 +108,11 @@ const HtmlTooltip = withStyles((theme) => ({
 }))(Tooltip);
 
 const menuItems = [
+  {
+    listIcon: <HomeIcon />,
+    listText: "Home",
+    listPath: "/home",
+  },
   {
     listIcon: <AssignmentIndIcon />,
     listText: "About",
@@ -213,13 +211,13 @@ const NavBar = (props) => {
   };
   // https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/
   return (
-    <div>
+    <div className={classes.root}>
+      <CssBaseline />
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
             News
           </Typography>
-          <div className={classes.sectionDesktop}>
             {
               menuItems.map((lstItm, key) => (
                 <HtmlTooltip title={lstItm.listText} placement="down" key={key}>
@@ -229,7 +227,6 @@ const NavBar = (props) => {
                 </HtmlTooltip>
               ))
             }
-          </div>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor"/>

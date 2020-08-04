@@ -5,10 +5,10 @@ import Typed from 'react-typed';
 
 const useStyles = makeStyles(theme => ({
    title: {
-      color: "tan",
+      color: "#1b1b1b",
    },
    subtitle: {
-      color: "tan",
+      color: "#1b1b1b",
    },
    typedContainer: {
       position: "absolute",
@@ -25,12 +25,12 @@ const Header = () => {
    
 	return (
 		<Box className={classes.typedContainer}>
-         <Typography className={classes.title} variant="h4">
+         <Typography className={classes.title} variant="h2">
             <Typed strings={["Brandon Lee"]} typeSpeed={40}/>
          </Typography>
-         <Typography className={classes.title} variant="h5">
+         <Typography className={classes.title} variant="h4">
             <Typed
-               strings={["Software Engineer", "DevOps"]}
+               strings={["Aspiring Software Engineer", "Life-long Learner", "Focused Problem Solver"]}
                typeSpeed={40}
                backSpeed={60}
                loop
