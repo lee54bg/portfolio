@@ -66,21 +66,19 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4),
   },
   academicCard: {
-    height: '250px',
-    width: '700px',
+    height: '130px',
+    width: '400px',
     padding: theme.spacing(4),
   },
   timeLine: {
     marginRight: '200px',
   },
   tabs: {
-    width: '480px',
-    margin: '0 auto',
     marginTop: '-60px'
   },
   introArea: {
+    flexGrow: 1,
     marginTop: '30px',
-    height: '480px',
     padding: theme.spacing(5),
   },
   introBody: {
@@ -94,9 +92,6 @@ const useStyles = makeStyles((theme) => ({
   },
   test: {
     margin: 'auto 0'
-  },
-  margin: {
-    margin: '0 auto',
   },
 }));
 
@@ -145,9 +140,10 @@ const timeLine = [
 const schoolTimeLine = [
   {
     schoolName: 'San Jose State University',
-    degree: 'Masters in Software Engineering',
+    degree: 'Software Engineering, M.S.',
     gpa: '3.3',
     dateAttended: '01/17 - 05/19',
+    location: 'San Jose, CA',
     courseWork: [
       "abc",
       "def",
@@ -155,9 +151,10 @@ const schoolTimeLine = [
     ]
   }, {
     schoolName: 'DeVry University',
-    degree: 'Bachelors in Computer Engineering Technology',
+    degree: 'Computer Engineering Technology, B.S.',
     gpa: '3.2',
     dateAttended: '08/11 - 01/15',
+    location: 'Fremont, CA',
     courseWork: [
       "abc",
       "def",
@@ -187,31 +184,6 @@ function About(props) {
 
   return (
     <NavBar>
-      {/* <div>
-        <Fab size="small" color="secondary" aria-label="add" className={classes.margin}>
-          <AddIcon />
-        </Fab>
-        <Fab size="medium" color="secondary" aria-label="add" className={classes.margin}>
-          <AddIcon />
-        </Fab>
-        <Fab color="secondary" aria-label="add" className={classes.margin}>
-          <AddIcon />
-        </Fab>
-      </div> */}
-      <Paper square className={classes.tabs}>
-        <Tabs
-          value={value}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={handleChange}
-          aria-label="disabled tabs example"
-          centered
-        >
-          <Tab label="Experience" />
-          <Tab label="Education" />
-          <Tab label="Skills" />
-        </Tabs>
-      </Paper>
       <Grid
         container
         direction="column"
@@ -219,7 +191,33 @@ function About(props) {
         alignItems="center"
         spacing={1}
       >
-        <Grid item xs={6}>
+        <Grid
+          className={classes.tabs}
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={1}
+          item xs={3}
+        >
+          <Grid item>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Grid>
+          <Grid item>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Grid>
+          <Grid item>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Grid>
+        </Grid>
+
+        <Grid item lg={6} xs={12}>
           <Paper className={classes.introArea}>
             <Typography variant="h3">
               Brandon Lee
@@ -315,19 +313,44 @@ function About(props) {
               <Typography variant="h4">{expItem.schoolName}</Typography>
               <Typography variant="h5">{expItem.degree}</Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator style={{height: '350px', }}>
+            <TimelineSeparator style={{height: '220px', }}>
               <TimelineDot />
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
               <Paper elevation={7} className={classes.academicCard}>
-                <Typography variant="h6" component="h1">
-                  Date Attended: {expItem.dateAttended}
-                </Typography>
-                <Typography variant="h6" component="h1">
-                  GPA: {expItem.gpa}
-                </Typography>
-                <Typography>
+                <Grid
+                  container
+                  direction="column"
+                  spacing={1}
+                >
+                  <Grid
+                    direction="row"
+                    spacing={1}
+                    container
+                    item
+                    xs={12}
+                  >
+                    <Typography inline variant="h6" component="h1" left="left" style={{flexGrow: 1}}>
+                      {expItem.dateAttended}
+                    </Typography>
+                    <Typography inline variant="h6" component="h1" align="right">
+                      GPA: {expItem.gpa}
+                    </Typography>                    
+                  </Grid>  
+                  <Grid
+                    direction="row"
+                    spacing={1}
+                    container
+                    item
+                    xs={12}
+                  >
+                    <Typography inline variant="h6" component="h1" left="left" style={{flexGrow: 1}}>
+                      {expItem.location}
+                    </Typography>
+                  </Grid>  
+                </Grid>
+                {/* <Typography>
                 <List dense={true}>
                   {
                     expItem.courseWork.map((taskItemText, key2) => (
@@ -338,7 +361,7 @@ function About(props) {
                     </ListItem>
                   ))}
                 </List>
-                </Typography>
+                </Typography> */}
               </Paper>
                 </TimelineContent>
           </TimelineItem>          

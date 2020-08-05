@@ -11,6 +11,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Switch } from 'react-router-dom';
 import Particles from 'react-particles-js';
 
+// https://stackoverflow.com/questions/46586165/react-conditionally-render-based-on-viewport-size
+
 function App() {
   return (
     <div className="App-header">
