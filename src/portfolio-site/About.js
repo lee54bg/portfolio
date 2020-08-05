@@ -1,6 +1,8 @@
 import React from 'react';
 import NavBar from './NavBar.js';
 
+import styles from './About.css';
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Container,
@@ -31,7 +33,8 @@ import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import WorkIcon from '@material-ui/icons/Work';
 import BuildIcon from '@material-ui/icons/Build';
 import SchoolIcon from '@material-ui/icons/School';
-import AddIcon from '@material-ui/icons/Add';
+
+import Education from './Education.js';
 
 import PropTypes from 'prop-types';
 
@@ -45,36 +48,26 @@ const useStyles = makeStyles((theme) => ({
     width: '640px',
     margin: '0 auto',
   },
-  displayArea: {
-    backgroundColor: '#73e8ff',
-    marginTop: '100px',
-    margin: '0 auto',
-    width: '90%',
-    height: '1000px',
-    textAlign: 'center',
-    overflow: 'auto',
-  },
-  testDiv: {
-    backgroundColor: 'blue',
-    width: '300px',
-    height: '300px',
-    margin: '0 auto',
-  },
   timeLineCard: {
     height: '300px',
     width: '700px',
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
   },
   academicCard: {
     height: '130px',
     width: '400px',
     padding: theme.spacing(4),
   },
+  acadPaper: {
+    flexGrow: 1,
+  },
   timeLine: {
     marginRight: '200px',
   },
   tabs: {
-    marginTop: '-60px'
+    marginTop: '60px',
+    position: 'sticky',
+    position: '-webkit-sticky',
   },
   introArea: {
     flexGrow: 1,
@@ -93,6 +86,10 @@ const useStyles = makeStyles((theme) => ({
   test: {
     margin: 'auto 0'
   },
+  acadCard: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  }
 }));
 
 // Work experience goes here
@@ -101,6 +98,7 @@ const timeLine = [
     companyName: 'Forescout Technologies',
     jobTitle: 'Research Engineering Intern',
     jobDescription: 'Worked on Device Classification',
+    duration: '06/19 - 06/20',
     jobTasks: [
       "abc",
       "def",
@@ -110,6 +108,7 @@ const timeLine = [
     companyName: 'San Jose State University Research Foundation',
     jobTitle: 'Research Assistant',
     jobDescription: 'Worked on Device Classification',
+    duration: '01/19 - 05/19',
     jobTasks: [
       "abc",
       "def",
@@ -119,15 +118,17 @@ const timeLine = [
     companyName: 'San Jose State University',
     jobTitle: 'IT Technician',
     jobDescription: 'Worked on Device Classification',
+    duration: '11/17 - 05/19',
     jobTasks: [
       "abc",
       "def",
       "ghi",
     ]
   }, {
-    companyName: 'San Jose State University',
-    jobTitle: 'IT Technician',
+    companyName: 'Ericsson Telecommunications',
+    jobTitle: 'Tech Writer',
     jobDescription: 'Worked on Device Classification',
+    duration: '04/15 - 04/16',
     jobTasks: [
       "abc",
       "def",
@@ -140,7 +141,8 @@ const timeLine = [
 const schoolTimeLine = [
   {
     schoolName: 'San Jose State University',
-    degree: 'Software Engineering, M.S.',
+    degree: 'Masters',
+    major: 'Software Engineering',
     gpa: '3.3',
     dateAttended: '01/17 - 05/19',
     location: 'San Jose, CA',
@@ -151,7 +153,8 @@ const schoolTimeLine = [
     ]
   }, {
     schoolName: 'DeVry University',
-    degree: 'Computer Engineering Technology, B.S.',
+    degree: 'Bachelors',
+    major: 'Computer Engineering Technology',
     gpa: '3.2',
     dateAttended: '08/11 - 01/15',
     location: 'Fremont, CA',
@@ -185,38 +188,13 @@ function About(props) {
   return (
     <NavBar>
       <Grid
+        style={{marginTop: '-70px'}}
         container
         direction="column"
         justify="center"
         alignItems="center"
-        spacing={1}
+        spacing={0}
       >
-        <Grid
-          className={classes.tabs}
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          spacing={1}
-          item xs={3}
-        >
-          <Grid item>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Grid>
-          <Grid item>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Grid>
-          <Grid item>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Grid>
-        </Grid>
-
         <Grid item lg={6} xs={12}>
           <Paper className={classes.introArea}>
             <Typography variant="h3">
@@ -241,7 +219,33 @@ function About(props) {
             </Typography>
           </Paper>
         </Grid>
+        <Grid
+          className={classes.tabs}
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={1}
+          item xs={8}
+        >
+          <Grid item>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <WorkIcon />
+            </Fab>
+          </Grid>
+          <Grid item>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <SchoolIcon />
+            </Fab>
+          </Grid>
+          <Grid item>
+            <Fab size="medium" color="secondary" aria-label="add">
+              <BuildIcon />
+            </Fab>
+          </Grid>
+        </Grid>
       </Grid>
+
       <Grid
         container
         direction="column"
@@ -250,19 +254,18 @@ function About(props) {
         spacing={1}
         className={classes.sections}
       >
-        <Grid item xs={6}>
+        <Grid item xs={6} style={{borderStyle: 'none none solid none'}}>
           <Typography variant="h3" component="h1" >
             Work Experience
           </Typography>
         </Grid>
       </Grid>
-
       <Timeline >
         {timeLine.map((expItem, key) => (
           <TimelineItem key={key}>
             <TimelineOppositeContent>
-              <Typography variant="h4">{expItem.companyName}</Typography>
-              <Typography variant="h5">{expItem.jobTitle}</Typography>
+              <Typography variant="h5">{expItem.duration}</Typography>
+              <Typography variant="h6">{expItem.companyName}</Typography>
             </TimelineOppositeContent>
             <TimelineSeparator style={{height: '400px', }}>
               <TimelineDot />
@@ -270,7 +273,7 @@ function About(props) {
             </TimelineSeparator>
             <TimelineContent>
               <Paper elevation={7} className={classes.timeLineCard}>
-                <Typography variant="h6" component="h1">
+                <Typography variant="h5" component="h1">
                   {expItem.jobTitle}
                 </Typography>
                 <Typography>
@@ -290,83 +293,8 @@ function About(props) {
           </TimelineItem>          
         ))}
       </Timeline>
-
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-        className={classes.sections}
-      >
-        <Grid item xs={6}>
-          <Typography variant="h3" component="h1" >
-            Education
-          </Typography>
-        </Grid>
-      </Grid>
-
-      <Timeline >
-        {schoolTimeLine.map((expItem, key) => (
-          <TimelineItem key={key}>
-            <TimelineOppositeContent>
-              <Typography variant="h4">{expItem.schoolName}</Typography>
-              <Typography variant="h5">{expItem.degree}</Typography>
-            </TimelineOppositeContent>
-            <TimelineSeparator style={{height: '220px', }}>
-              <TimelineDot />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <Paper elevation={7} className={classes.academicCard}>
-                <Grid
-                  container
-                  direction="column"
-                  spacing={1}
-                >
-                  <Grid
-                    direction="row"
-                    spacing={1}
-                    container
-                    item
-                    xs={12}
-                  >
-                    <Typography inline variant="h6" component="h1" left="left" style={{flexGrow: 1}}>
-                      {expItem.dateAttended}
-                    </Typography>
-                    <Typography inline variant="h6" component="h1" align="right">
-                      GPA: {expItem.gpa}
-                    </Typography>                    
-                  </Grid>  
-                  <Grid
-                    direction="row"
-                    spacing={1}
-                    container
-                    item
-                    xs={12}
-                  >
-                    <Typography inline variant="h6" component="h1" left="left" style={{flexGrow: 1}}>
-                      {expItem.location}
-                    </Typography>
-                  </Grid>  
-                </Grid>
-                {/* <Typography>
-                <List dense={true}>
-                  {
-                    expItem.courseWork.map((taskItemText, key2) => (
-                    <ListItem key={key2}>
-                      <ListItemText
-                        primary={taskItemText}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-                </Typography> */}
-              </Paper>
-                </TimelineContent>
-          </TimelineItem>          
-        ))}
-      </Timeline>
+      
+      <Education />
     </NavBar>
   );
 }
