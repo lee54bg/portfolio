@@ -253,7 +253,7 @@ function Education(props) {
         direction="column"
         justify="center"
         alignItems="center"
-        spacing={5}
+        spacing={1}
         className={classes.sections}
       >
         <Grid item xs={12}>

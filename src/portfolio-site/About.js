@@ -1,17 +1,12 @@
 import React from 'react';
 import NavBar from './NavBar.js';
 
-import styles from './About.css';
+// import styles from './About.css';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
-  Container,
   Fab,
   Grid,
-  IconButton,
-  ListItemText,
-  ListItem,
-  List,
   Paper,
   Tab,
   Tabs,
@@ -35,15 +30,9 @@ import BuildIcon from '@material-ui/icons/Build';
 import SchoolIcon from '@material-ui/icons/School';
 
 import Education from './Education.js';
-
-import PropTypes from 'prop-types';
-
-const drawerWidth = 240;
+import WorkExp from './WorkExp.js';
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-  },
   root: {
     width: '640px',
     margin: '0 auto',
@@ -77,94 +66,10 @@ const useStyles = makeStyles((theme) => ({
   introBody: {
     marginTop: '22px'
   },
-  workExp: {
-    marginTop: '22px',
-  },
-  sections: {
-    marginTop: '50px',
-  },
   test: {
     margin: 'auto 0'
   },
-  acadCard: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  }
 }));
-
-// Work experience goes here
-const timeLine = [
-  {
-    companyName: 'Forescout Technologies',
-    jobTitle: 'Research Engineering Intern',
-    jobDescription: 'Worked on Device Classification',
-    duration: '06/19 - 06/20',
-    jobTasks: [
-      "abc",
-      "def",
-      "ghi",
-    ]
-  }, {
-    companyName: 'San Jose State University Research Foundation',
-    jobTitle: 'Research Assistant',
-    jobDescription: 'Worked on Device Classification',
-    duration: '01/19 - 05/19',
-    jobTasks: [
-      "abc",
-      "def",
-      "ghi",
-    ]
-  }, {
-    companyName: 'San Jose State University',
-    jobTitle: 'IT Technician',
-    jobDescription: 'Worked on Device Classification',
-    duration: '11/17 - 05/19',
-    jobTasks: [
-      "abc",
-      "def",
-      "ghi",
-    ]
-  }, {
-    companyName: 'Ericsson Telecommunications',
-    jobTitle: 'Tech Writer',
-    jobDescription: 'Worked on Device Classification',
-    duration: '04/15 - 04/16',
-    jobTasks: [
-      "abc",
-      "def",
-      "ghi",
-    ]
-  }
-];
-
-// Work experience goes here
-const schoolTimeLine = [
-  {
-    schoolName: 'San Jose State University',
-    degree: 'Masters',
-    major: 'Software Engineering',
-    gpa: '3.3',
-    dateAttended: '01/17 - 05/19',
-    location: 'San Jose, CA',
-    courseWork: [
-      "abc",
-      "def",
-      "ghi",
-    ]
-  }, {
-    schoolName: 'DeVry University',
-    degree: 'Bachelors',
-    major: 'Computer Engineering Technology',
-    gpa: '3.2',
-    dateAttended: '08/11 - 01/15',
-    location: 'Fremont, CA',
-    courseWork: [
-      "abc",
-      "def",
-      "ghi",
-    ]
-  }
-];
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -229,71 +134,30 @@ function About(props) {
           item xs={8}
         >
           <Grid item>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <WorkIcon />
-            </Fab>
+            <HtmlTooltip title="Work Experience" placement="down">
+              <Fab size="medium" color="secondary" aria-label="add">
+                <WorkIcon />
+              </Fab>
+            </HtmlTooltip>
           </Grid>
           <Grid item>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <SchoolIcon />
-            </Fab>
+            <HtmlTooltip title="Academic" placement="down">
+              <Fab size="medium" color="secondary" aria-label="add">
+                <SchoolIcon />
+              </Fab>
+            </HtmlTooltip>
           </Grid>
           <Grid item>
-            <Fab size="medium" color="secondary" aria-label="add">
-              <BuildIcon />
-            </Fab>
+            <HtmlTooltip title="Skills" placement="down">
+              <Fab size="medium" color="secondary" aria-label="add">
+                <BuildIcon />
+              </Fab>
+            </HtmlTooltip>
           </Grid>
         </Grid>
       </Grid>
 
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-        className={classes.sections}
-      >
-        <Grid item xs={6} style={{borderStyle: 'none none solid none'}}>
-          <Typography variant="h3" component="h1" >
-            Work Experience
-          </Typography>
-        </Grid>
-      </Grid>
-      <Timeline >
-        {timeLine.map((expItem, key) => (
-          <TimelineItem key={key}>
-            <TimelineOppositeContent>
-              <Typography variant="h5">{expItem.duration}</Typography>
-              <Typography variant="h6">{expItem.companyName}</Typography>
-            </TimelineOppositeContent>
-            <TimelineSeparator style={{height: '400px', }}>
-              <TimelineDot />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <Paper elevation={7} className={classes.timeLineCard}>
-                <Typography variant="h5" component="h1">
-                  {expItem.jobTitle}
-                </Typography>
-                <Typography>
-                <List dense={true}>
-                  {
-                    expItem.jobTasks.map((taskItemText, key2) => (
-                    <ListItem key={key2}>
-                      <ListItemText
-                        primary={taskItemText}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-                </Typography>
-              </Paper>
-                </TimelineContent>
-          </TimelineItem>          
-        ))}
-      </Timeline>
-      
+      <WorkExp />
       <Education />
     </NavBar>
   );
