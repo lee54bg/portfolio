@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import styles from './About.css';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
-  Container,
-  Fab,
   Grid,
   IconButton,
+  ListItemIcon,
   ListItemText,
   ListItem,
   List,
   Paper,
   Typography,
-  useScrollTrigger,
-  Zoom
 } from '@material-ui/core';
+
+import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -24,19 +22,13 @@ import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-  },
   root: {
     width: '640px',
     margin: '0 auto',
   },
   timeLineCard: {
-    height: '300px',
-    width: '700px',
+    flexGrow: 1,    
     padding: theme.spacing(3),
   },
   academicCard: {
@@ -89,7 +81,11 @@ const timeLine = [
       "abc",
       "def",
       "ghi",
-    ]
+    ],
+    accomplishments: [
+      "Ensured 95% Device Visibility on a monthly cadence",
+      "Increased one of Forescouts Product Line Device Discovery by 50%",
+    ],
   }, {
     companyName: 'San Jose State University Research Foundation',
     jobTitle: 'Research Assistant',
@@ -99,7 +95,8 @@ const timeLine = [
       "abc",
       "def",
       "ghi",
-    ]
+    ],
+    accomplishments: [],
   }, {
     companyName: 'San Jose State University',
     jobTitle: 'IT Technician',
@@ -109,7 +106,8 @@ const timeLine = [
       "abc",
       "def",
       "ghi",
-    ]
+    ],
+    accomplishments: [],
   }, {
     companyName: 'Ericsson Telecommunications',
     jobTitle: 'Tech Writer',
@@ -119,7 +117,8 @@ const timeLine = [
       "abc",
       "def",
       "ghi",
-    ]
+    ],
+    accomplishments: [],
   }
 ];
 
@@ -127,7 +126,62 @@ function MobileTimeLine() {
   const classes = useStyles();
 
   return (
-    <div></div>
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      {timeLine.map((expItem, key) => (
+        <Grid item lg={8} key={key}>
+          <Paper elevation={7} className={classes.timeLineCard}>
+            <Typography variant="h4">{expItem.companyName}</Typography>
+            <Typography variant="h5" component="h1" style={{marginTop: '10px'}}>
+              {expItem.jobTitle}
+            </Typography>
+            <Typography variant="h6" component="h1" style={{marginTop: '10px'}}>
+              Key Contributions
+            </Typography>
+            <List dense={true}>
+              {
+                expItem.jobTasks.map((taskItemText, key2) => (
+                <ListItem key={key2}>
+                  <ListItemIcon>
+                    <ArrowForwardIosOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={taskItemText}
+                  />
+                </ListItem>
+              ))}
+            </List>
+            {expItem.accomplishments.length ? 
+              (
+                <>
+                <Typography variant="h5" component="h1">
+                  Accomplishments
+                </Typography>
+                <List dense={true}>
+                  {expItem.accomplishments.map((item, key2) => (
+                    <ListItem key={key2}>
+                      <ListItemIcon>
+                        <ArrowForwardIosOutlinedIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+                </>
+              )
+            : null}
+            <Typography variant="h5" style={{marginTop: '10px'}}>{expItem.duration}</Typography>
+          </Paper>
+        </Grid>
+      ))}
+    </Grid>
   );
 }
 
@@ -135,7 +189,67 @@ function DesktopTimeLine() {
   const classes = useStyles();
 
   return (
-    <div></div>
+    <Timeline >
+      {timeLine.map((expItem, key) => (
+        <TimelineItem key={key}>
+          <TimelineOppositeContent>
+            <Typography variant="h5">{expItem.duration}</Typography>
+            <Typography variant="h6">{expItem.companyName}</Typography>
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>
+            <Grid item lg={8}>
+              <Paper elevation={7} className={classes.timeLineCard}>
+                <Typography variant="h5" component="h1">
+                  {expItem.jobTitle}
+                </Typography>
+                <Typography variant="h6" component="h1" style={{marginTop: '10px'}}>
+                  Key Contributions
+                </Typography>
+                {/* {notes.length ? notes : <p>Default Markup</p>} */}
+                <List dense={true}>
+                  {
+                    expItem.jobTasks.map((taskItemText, key2) => (
+                    <ListItem key={key2}>
+                      <ListItemIcon>
+                        <ArrowForwardIosOutlinedIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={taskItemText}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+                {expItem.accomplishments.length ? 
+                  (
+                    <>
+                    <Typography variant="h5" component="h1">
+                      Accomplishments
+                    </Typography>
+                    <List dense={true}>
+                      {expItem.accomplishments.map((item, key2) => (
+                        <ListItem key={key2}>
+                          <ListItemIcon>
+                            <ArrowForwardIosOutlinedIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={item}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                    </>
+                  )
+                : null}
+              </Paper>
+            </Grid>
+              </TimelineContent>
+        </TimelineItem>          
+      ))}
+    </Timeline>
   );
 }
 
@@ -166,45 +280,21 @@ function WorkExp(props) {
         spacing={1}
         className={classes.sections}
       >
-        <Grid item xs={6} style={{borderStyle: 'none none solid none'}}>
+        <Grid item xs={6} style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
           <Typography variant="h3" component="h1" >
             Work Experience
           </Typography>
         </Grid>
       </Grid>
-      <Timeline >
-        {timeLine.map((expItem, key) => (
-          <TimelineItem key={key}>
-            <TimelineOppositeContent>
-              <Typography variant="h5">{expItem.duration}</Typography>
-              <Typography variant="h6">{expItem.companyName}</Typography>
-            </TimelineOppositeContent>
-            <TimelineSeparator style={{height: '350px', }}>
-              <TimelineDot />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <Paper elevation={7} className={classes.timeLineCard}>
-                <Typography variant="h5" component="h1">
-                  {expItem.jobTitle}
-                </Typography>
-                <Typography>
-                <List dense={true}>
-                  {
-                    expItem.jobTasks.map((taskItemText, key2) => (
-                    <ListItem key={key2}>
-                      <ListItemText
-                        primary={taskItemText}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-                </Typography>
-              </Paper>
-                </TimelineContent>
-          </TimelineItem>          
-        ))}
-      </Timeline>
+      {
+        isDesktop ? (
+          <Grid item lg={12}>
+            <DesktopTimeLine/ >
+          </Grid>
+        ) : (
+          <MobileTimeLine/>
+        )
+      }
     </>
   );
 }

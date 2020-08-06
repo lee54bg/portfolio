@@ -194,18 +194,6 @@ function DesktopTimeLine() {
                   </Typography>
                 </Grid>  
               </Grid>
-              {/* <Typography>
-              <List dense={true}>
-                {
-                  expItem.courseWork.map((taskItemText, key2) => (
-                  <ListItem key={key2}>
-                    <ListItemText
-                      primary={taskItemText}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-              </Typography> */}
             </Paper>
               </TimelineContent>
         </TimelineItem>          

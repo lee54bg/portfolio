@@ -71,7 +71,7 @@ function Contact() {
         justify="center"
         alignItems="center"
       >
-        <Grid container xs={3}>
+        <Grid container lg={5} md={5} x={5} xs={12}>
           <div className={classes.contactMsg}>
             <Typography variant="h4">
               <Typed

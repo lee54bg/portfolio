@@ -24,6 +24,7 @@ import SchoolIcon from '@material-ui/icons/School';
 
 import Education from './Education.js';
 import WorkExp from './WorkExp.js';
+import Skills from './Skills.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -187,7 +188,14 @@ function About(props) {
           // </Zoom>
         ) : null
       }
-    </NavBar>
+      {
+        skills ? (
+          // <Zoom in={acad}>
+            <Skills />        
+          // </Zoom>
+        ) : null
+      }
+      </NavBar>
     </>
   );
 }
