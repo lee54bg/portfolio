@@ -10,16 +10,14 @@ import {
   Box, 
   withStyles
 } from '@material-ui/core'
+
 import { sizing } from '@material-ui/system';
 import NavBar from './NavBar.js';
+import Typed from 'react-typed';
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    left: "50%",
     top: "50%",
-    transform: "translate(-50%, -50%)",
-    position: "absolute",
-    width: '500px',
   },
   messageForm: {
     height: '150px',
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contactMsg: {
     borderStyle: 'none none solid none',
-    marginBottom: '40px'
+    marginBottom: '10px'
   }
 }));
 
@@ -67,50 +65,62 @@ function Contact() {
 
   return (
     <NavBar>
-      <Box component="div" className={classes.form}>
-        <div className={classes.contactMsg}>
-          <Typography variant="h4">
-            Contact Me
-          </Typography>
-        </div>
-        <InputField
-          fullWidth={true}
-          label="Full Name" 
-          variant="outlined"
-          margin="dense"
-          size="large"
+      <Grid className={classes.form}   
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid container xs={3}>
+          <div className={classes.contactMsg}>
+            <Typography variant="h4">
+              <Typed
+                strings={["Have an idea?", "Need some assistance?"]}
+                typeSpeed={40}
+                backSpeed={60}
+                loop
+              />
+            </Typography>
+          </div>
+          <InputField
+            fullWidth={true}
+            label="Full Name" 
+            variant="outlined"
+            margin="dense"
+            size="large"
+            />
+          <br/>
+          <InputField 
+            fullWidth={true} 
+            label="Email Address" 
+            variant="outlined"
+            margin="dense"
+            size="large"/>
+          <br/>
+          <InputField fullWidth={true} label="Subject" variant="outlined"
+            margin="dense"
+            size="large"/>
+          <br/>
+          <InputField
+            fullWidth={true} 
+            label="Message"
+            variant="outlined"
+            margin="dense"
+            size="large"
+            multiline
+            /* styles the input component */
+            inputProps={{
+              style: {
+                height,
+              },
+            }}
           />
-        <br/>
-        <InputField 
-          fullWidth={true} 
-          label="Email Address" 
-          variant="outlined"
-          margin="dense"
-          size="large"/>
-        <br/>
-        <InputField fullWidth={true} label="Subject" variant="outlined"
-          margin="dense"
-          size="large"/>
-        <br/>
-        <InputField
-          fullWidth={true} 
-          label="Message"
-          variant="outlined"
-          margin="dense"
-          size="large"
-          multiline
-          /* styles the input component */
-          inputProps={{
-            style: {
-              height,
-            },
-          }}
-        />
-        <br/>
-        <Button variant="contained" endIcon={<SendIcon />} color="primary">
-          Contact Me
-        </Button>
-      </Box>
+          <br/>
+          <Button variant="contained" endIcon={<SendIcon />} color="primary">
+            Contact Me
+          </Button>
+        </Grid>
+      </Grid>
     </NavBar>
   );
 }

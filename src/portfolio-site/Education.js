@@ -40,20 +40,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   academicCard: {
-    height: '130px',
-    width: '400px',
-    padding: theme.spacing(4),
+    height: '100px',
+    width: '450px',
+    padding: theme.spacing(3),
   },
   acadPaper: {
     flexGrow: 1,
-  },
-  timeLine: {
-    marginRight: '200px',
-  },
-  tabs: {
-    marginTop: '60px',
-    position: 'sticky',
-    position: '-webkit-sticky',
   },
   introArea: {
     flexGrow: 1,
@@ -63,9 +55,6 @@ const useStyles = makeStyles((theme) => ({
   introBody: {
     marginTop: '22px'
   },
-  workExp: {
-    marginTop: '22px',
-  },
   sections: {
     marginTop: '50px',
   },
@@ -74,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   acadCard: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(1),
   }
 }));
 
@@ -95,7 +84,7 @@ const schoolTimeLine = [
   }, {
     schoolName: 'DeVry University',
     degree: 'Bachelors',
-    major: 'Computer Engineering Technology',
+    major: 'Computer Engineering',
     gpa: '3.2',
     dateAttended: '08/11 - 01/15',
     location: 'Fremont, CA',
@@ -165,7 +154,7 @@ function DesktopTimeLine() {
             <Typography variant="h5">{expItem.dateAttended}</Typography>
             <Typography variant="h6">{expItem.schoolName}</Typography>
           </TimelineOppositeContent>
-          <TimelineSeparator style={{height: '220px', }}>
+          <TimelineSeparator style={{height: '140px', }}>
             <TimelineDot />
             <TimelineConnector />
           </TimelineSeparator>
@@ -184,11 +173,11 @@ function DesktopTimeLine() {
                   xs={12}
                 >
                   <Typography inline variant="h6" component="h1" left="left" style={{flexGrow: 1}}>
-                    {expItem.dateAttended}
+                    {expItem.degree}
                   </Typography>
-                  <Typography inline variant="h6" component="h1" align="right">
-                    GPA: {expItem.gpa}
-                  </Typography>                    
+                  <Typography inline variant="h6" component="h1" left="right">
+                    {expItem.major}
+                  </Typography>
                 </Grid>  
                 <Grid
                   direction="row"
@@ -197,12 +186,12 @@ function DesktopTimeLine() {
                   item
                   xs={12}
                 >
-                  <Typography inline variant="h6" component="h1" left="left" style={{flexGrow: 1}}>
+                  <Typography inline variant="h6" component="h1" align="left" style={{flexGrow: 1}}>
                     GPA: {expItem.gpa}
                   </Typography>
-                  <Typography inline variant="h6" component="h1" align="right">
+                  <Typography inline variant="h6" component="h1" left="right">
                     {expItem.location}
-                  </Typography>                    
+                  </Typography>
                 </Grid>  
               </Grid>
               {/* <Typography>

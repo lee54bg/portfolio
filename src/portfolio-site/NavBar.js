@@ -221,24 +221,8 @@ const NavBar = (props) => {
     setOpen(!open);
   };
 
-  const titleHome = () => {
-    setTitle('')
-  }
-
-  const titleAbout = () => {
-    setTitle('About')
-  }
-
-  const titlePortfolio = () => {
-    setTitle('Portfolio')
-  }
-
-  const titleContact = () => {
-    setTitle('Contact')
-  }
-
-  const handleTitle = (value) => {
-    setTitle(value)
+  function setTextName(name) {
+    setTitle(name)
   }
 
   // https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/
@@ -253,7 +237,11 @@ const NavBar = (props) => {
             {
               menuItems.map((lstItm, key) => (
                 <HtmlTooltip title={lstItm.listText} placement="down" key={key}>
-                  <IconButton color="inherit" component={Link} to={lstItm.listPath} >
+                  <IconButton color="inherit" 
+                    onClick={() => setTextName(lstItm.listText)}
+                    component={Link}
+                    to={lstItm.listPath}
+                  >
                     {lstItm.listIcon}
                   </IconButton>
                 </HtmlTooltip>

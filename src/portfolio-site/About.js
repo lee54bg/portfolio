@@ -14,16 +14,9 @@ import {
   Tooltip,
   Typography,
   useScrollTrigger,
-  Zoom
+  Zoom,
+  TextareaAutosize
 } from '@material-ui/core';
-
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
 import WorkIcon from '@material-ui/icons/Work';
 import BuildIcon from '@material-ui/icons/Build';
@@ -81,16 +74,45 @@ const HtmlTooltip = withStyles((theme) => ({
   },
 }))(Tooltip);
 
+function Introduction() {
+  const classes = useStyles();
+
+  return (
+    <Grid item lg={6} xs={12}>
+      <Paper className={classes.introArea}>
+        <Typography variant="h3">
+          Brandon Lee
+        </Typography>
+        <Typography variant="h4">
+          Software Engineering Graduate
+        </Typography>
+        <Typography variant="body1" className={classes.introBody}>
+          Greetings, my name is Brandon.  I'm a Software Engineering Graduate seeking to further my skills in the industry.  I specialize in Networking Software
+          and also like to learn more about different types of tech on my own free time.
+        </Typography>
+        <Typography variant="body1" className={classes.introBody}>
+          I've had a variety of experiences in the tech industry ranging from being a Test Technician, to writing concise and easy to understand documentation
+          as a Tech Writer, to having experience in IT Support.  I've finally steered my direction into Research during graduate school and after graduation.
+          The various experiences I've had allows me to tackle problems from a variety of angles.
+        </Typography>
+        <Typography variant="body1" className={classes.introBody}>
+          Currently, I am looking for an opportunity to grow as a Software Engineer and to contribute my efforts within the tech space.  
+          I'm excited and passionate about being able to contribute my skills and efforts to not only help see the company grow but to also
+          further my career within the Software Engineering space.
+        </Typography>
+      </Paper>
+    </Grid>
+  );
+}
 
 function About(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [workExp, setWorkExp] = React.useState(true);
+  const [acad, setAcad] = React.useState(false);
+  const [skills, setSkills] = React.useState(false);
 
   return (
+    <>
     <NavBar>
       <Grid
         style={{marginTop: '-70px'}}
@@ -100,30 +122,7 @@ function About(props) {
         alignItems="center"
         spacing={0}
       >
-        <Grid item lg={6} xs={12}>
-          <Paper className={classes.introArea}>
-            <Typography variant="h3">
-              Brandon Lee
-            </Typography>
-            <Typography variant="h4">
-              Software Engineering Graduate
-            </Typography>
-            <Typography variant="body1" className={classes.introBody}>
-              Greetings, my name is Brandon.  I'm a Software Engineering Graduate seeking to further my skills in the industry.  I specialize in Networking Software
-              and also like to learn more about different types of tech on my own free time.
-            </Typography>
-            <Typography variant="body1" className={classes.introBody}>
-              I've had a variety of experiences in the tech industry ranging from being a Test Technician, to writing concise and easy to understand documentation
-              as a Tech Writer, to having experience in IT Support.  I've finally steered my direction into Research during graduate school and after graduation.
-              The various experiences I've had allows me to tackle problems from a variety of angles.
-            </Typography>
-            <Typography variant="body1" className={classes.introBody}>
-              Currently, I am looking for an opportunity to grow as a Software Engineer and to contribute my efforts within the tech space.  
-              I'm excited and passionate about being able to contribute my skills and efforts to not only help see the company grow but to also
-              further my career within the Software Engineering space.
-            </Typography>
-          </Paper>
-        </Grid>
+        <Introduction />
         <Grid
           className={classes.tabs}
           container
@@ -135,31 +134,61 @@ function About(props) {
         >
           <Grid item>
             <HtmlTooltip title="Work Experience" placement="down">
-              <Fab size="medium" color="secondary" aria-label="add">
+              <Fab size="medium" color="secondary" aria-label="add"
+                onClick={() => {
+                  setWorkExp(true);
+                  setAcad(false);
+                  setSkills(false);
+                }}
+              >
                 <WorkIcon />
               </Fab>
             </HtmlTooltip>
           </Grid>
           <Grid item>
             <HtmlTooltip title="Academic" placement="down">
-              <Fab size="medium" color="secondary" aria-label="add">
+              <Fab size="medium" color="secondary" aria-label="add"
+                onClick={() => {
+                  setWorkExp(false);
+                  setAcad(true);
+                  setSkills(false);
+                }}
+              >
                 <SchoolIcon />
               </Fab>
             </HtmlTooltip>
           </Grid>
           <Grid item>
             <HtmlTooltip title="Skills" placement="down">
-              <Fab size="medium" color="secondary" aria-label="add">
+              <Fab size="medium" color="secondary" aria-label="add"
+                onClick={() => {
+                  setWorkExp(false);
+                  setAcad(false);
+                  setSkills(true);
+                }}              
+              >
                 <BuildIcon />
               </Fab>
             </HtmlTooltip>
           </Grid>
         </Grid>
       </Grid>
-
-      <WorkExp />
-      <Education />
+      {
+        workExp ? (
+          // <Zoom in={workExp}>
+            <WorkExp />
+          // </Zoom>  
+        ) : null
+      }
+      {
+        acad ? (
+          // <Zoom in={acad}>
+            <Education />        
+          // </Zoom>
+        ) : null
+      }
     </NavBar>
+    </>
   );
 }
 

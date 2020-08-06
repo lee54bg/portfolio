@@ -156,10 +156,6 @@ function WorkExp(props) {
     return () => window.removeEventListener("resize", updateMedia);
   });
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <>
       <Grid
@@ -183,7 +179,7 @@ function WorkExp(props) {
               <Typography variant="h5">{expItem.duration}</Typography>
               <Typography variant="h6">{expItem.companyName}</Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator style={{height: '400px', }}>
+            <TimelineSeparator style={{height: '350px', }}>
               <TimelineDot />
               <TimelineConnector />
             </TimelineSeparator>

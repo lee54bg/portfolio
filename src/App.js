@@ -5,6 +5,7 @@ import Home from './portfolio-site/Home';
 import About from './portfolio-site/About.js';
 import Contact from './portfolio-site/Contact.js';
 import Portfolio from './portfolio-site/Portfolio.js';
+import ParticlesContainer from './portfolio-site/ParticlesContainer';
 
 import { Route } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
