@@ -2,17 +2,15 @@ import React from 'react';
 import NavBar from './NavBar.js';
 
 import { makeStyles } from '@material-ui/core/styles';
+
 import {
-  Box,
   Button,
   Chip,
   Grid,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
-  Paper,
   Snackbar,
   Typography,
   Zoom
@@ -28,7 +26,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 import project1 from '../images/html-css-javascript-lg.jpg';
 import project2 from '../images/javascript-fullstack.jpg';
-const drawerWidth = 240;
 
 const projectDetails = [
   {
@@ -56,7 +53,7 @@ const projectDetails = [
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
-    width: 400,
+    flexGrow: 1,
   },
   projectContainer: {
     paddingLeft: 100,
@@ -114,23 +111,22 @@ function Portfolio() {
 
     switch(category) {
       case 'ReactJS':
-        // console.log(category);
-        // setCategory(category.filter(item => {
-        //   item.projectStack.filter(
-        //     item2 !== category
-        //   )
-        // }));
-        break;
-      case 'SDN':
-        // console.log(category);
-        // setCategory(category.filter(item => item.projectStack !== category));
-        newArray = projectDetails;
-
-        newArray = newArray.filter(item => {
+        newArray = projectDetails.filter(item => {
           return item.projectStack.includes(category)
         });
-
+        
+        console.log(newArray);
         setCategory(newArray);
+
+        break;
+      case 'SDN':
+        newArray = projectDetails.filter(item => {
+          return item.projectStack.includes(category)
+        });
+        
+        console.log(newArray);
+        setCategory(newArray);
+
         break;
       case 'all':
         setCategory(projectDetails);
@@ -221,9 +217,9 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
           </Button>
         </DialogActions>
       </Dialog>
-      <Grid container spacing={8} justify="center" >
+      <Grid container spacing={7} justify="center" lg={12}>
         {category.map((projectItem, key) => (
-          <Grid key={key} item>
+          <Grid key={key} item lg={4}>
               <Card className={classes.cardContainer}>
                 <CardMedia
                   component="img"
