@@ -35,46 +35,24 @@ const projectDetails = [
     projectName: "Project 1",
     projectDetails: "Project 1",
     projectImage: project1,
+    projectStack: ["ReactJS"],
   }, {
     projectName: "Project 2",
     projectDetails: "Project 2",
     projectImage: project2,
+    projectStack: ["Java"],
   }, {
     projectName: "Project 3",
     projectDetails: "Project 3",
     projectImage: project1,
+    projectStack: ["Python"],
   }, {
     projectName: "Project 3",
     projectDetails: "Project 3",
     projectImage: project1,
-  }, {
-    projectName: "Project 3",
-    projectDetails: "Project 3",
-    projectImage: project1,
-  }, {
-    projectName: "Project 3",
-    projectDetails: "Project 3",
-    projectImage: project1,
-  }, {
-    projectName: "Project 3",
-    projectDetails: "Project 3",
-    projectImage: project1,
-  }, {
-    projectName: "Project 3",
-    projectDetails: "Project 3",
-    projectImage: project1,
-  }, {
-    projectName: "Project 3",
-    projectDetails: "Project 3",
-    projectImage: project1,
-  }
+    projectStack: ["SDN"],
+  },
 ];
-
-const portfolioStyle = {
-  backgroundColor: 'tan',
-  width: `calc(100% - ${drawerWidth}px)`,
-  marginLeft: drawerWidth,
-};
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -103,16 +81,14 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
+
 function Portfolio() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [snackBar, setSnackBar] = React.useState(false);
-
   const [scroll, setScroll] = React.useState('paper');
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+  const [category, setCategory] = React.useState(projectDetails);
 
   const handleSnackBar = () => {
     setSnackBar(true);
@@ -133,6 +109,36 @@ function Portfolio() {
 
   const descriptionElementRef = React.useRef(null);
 
+  function findCategory(category) {
+    var newArray = [];
+
+    switch(category) {
+      case 'ReactJS':
+        // console.log(category);
+        // setCategory(category.filter(item => {
+        //   item.projectStack.filter(
+        //     item2 !== category
+        //   )
+        // }));
+        break;
+      case 'SDN':
+        // console.log(category);
+        // setCategory(category.filter(item => item.projectStack !== category));
+        newArray = projectDetails;
+
+        newArray = newArray.filter(item => {
+          return item.projectStack.includes(category)
+        });
+
+        setCategory(newArray);
+        break;
+      case 'all':
+        setCategory(projectDetails);
+      default:
+        setCategory(projectDetails);
+    }
+  }
+
   return (
     <NavBar>
       <Grid
@@ -144,15 +150,15 @@ function Portfolio() {
         spacing={1}
       >
         <Grid item>
-          <Button variant="contained">All</Button>
+          <Button variant="contained" onClick={() => findCategory("all")}>All</Button>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={() => findCategory("ReactJS")}>
             React.js
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={() => findCategory("SDN")}>
             Software-Defined Networks
           </Button>
         </Grid>
@@ -216,25 +222,23 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
         </DialogActions>
       </Dialog>
       <Grid container spacing={8} justify="center" >
-        {projectDetails.map((projectItem, key) => (
+        {category.map((projectItem, key) => (
           <Grid key={key} item>
               <Card className={classes.cardContainer}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="Project 1"
-                    height="140"
-                    image={projectItem.projectImage}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" className="classes.pro">
-                      {projectItem.projectName}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    {projectItem.projectDetails}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="Project 1"
+                  height="140"
+                  image={projectItem.projectImage}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" className="classes.pro">
+                    {projectItem.projectName}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  {projectItem.projectDetails}
+                  </Typography>
+                </CardContent>
                 <CardActions>
                     <Button size="small" color="primary" onClick={handleSnackBar}>
                       GitHub
