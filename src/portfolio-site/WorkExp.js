@@ -132,9 +132,10 @@ function MobileTimeLine() {
       justify="center"
       alignItems="center"
       spacing={1}
+      xs={12}
     >
       {timeLine.map((expItem, key) => (
-        <Grid item lg={8} key={key}>
+        <Grid item xs={12} key={key}>
           <Paper elevation={7} className={classes.timeLineCard}>
             <Typography variant="h4">{expItem.companyName}</Typography>
             <Typography variant="h5" component="h1" style={{marginTop: '10px'}}>
