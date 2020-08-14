@@ -53,7 +53,7 @@ const Home = () => {
                 <Typed strings={["Brandon Lee"]} typeSpeed={40}/>
               </Typography>
             </Grid>
-            <Grid item lg={3} xs={3}>
+            <Grid item lg={5} xs={5}>
             <Typography variant="h4">
               <Typed
                 strings={["Aspiring Software Engineer", "Life-Long Learner", "Focused Problem Solver"]}
