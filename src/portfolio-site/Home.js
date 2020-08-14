@@ -38,7 +38,6 @@ const Home = () => {
       <div className={classes.root}>
         <CssBaseline />
         <NavBar />
-        <div>  
           <Grid
             className={classes.headerArea}
             container
@@ -68,7 +67,6 @@ const Home = () => {
               <Button variant="contained" href="/about">Get Started</Button>
             </Grid>
           </Grid>
-        </div>
       </div>
     </>
   );
