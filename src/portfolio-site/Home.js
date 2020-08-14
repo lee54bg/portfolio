@@ -46,15 +46,15 @@ const Home = () => {
             justify="center"
             alignItems="center"
             spacing={1}
+            lg={12}
+            xs={12}
           >
-            <Fade in={checked}>
-            <Grid item>
+            <Grid item lg={3} xs={3}>
               <Typography variant="h2">
                 <Typed strings={["Brandon Lee"]} typeSpeed={40}/>
               </Typography>
             </Grid>
-            </Fade>
-            <Grid item>
+            <Grid item lg={3} xs={3}>
             <Typography variant="h4">
               <Typed
                 strings={["Aspiring Software Engineer", "Life-Long Learner", "Focused Problem Solver"]}
