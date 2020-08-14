@@ -281,7 +281,7 @@ function WorkExp(props) {
         spacing={1}
         className={classes.sections}
       >
-        <Grid item xs={6} style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
+        <Grid item xs={10} style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
           <Typography variant="h3" component="h1" >
             Work Experience
           </Typography>

@@ -140,7 +140,7 @@ function Skills(props) {
         spacing={1}
         className={classes.sections}
       >
-        <Grid item xs={12}>
+        <Grid item xs={12} justify="center" alignItems="center">
           <Typography variant="h3" component="h1">
             <Typed
                 strings={["Skills"]}
@@ -160,7 +160,7 @@ function Skills(props) {
         >
           {
             skillsList.map((skill, key) => (
-              <Grid item lg={4} xs={5} key={key}>
+              <Grid item lg={4} xs={11} key={key}>
                 <Paper className={classes.skillsCard}>
                   <Typography variant="h6">
                     {skill.category}
