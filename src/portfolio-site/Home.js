@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   headerArea: {
-    marginTop: '100px',
+    marginTop: '60px',
     margin: '0 auto',
   },
   getStarted: {
@@ -48,13 +48,13 @@ const Home = () => {
             lg={12}
             xs={12}
           >
-            <Grid item lg={3} xs={3}>
-              <Typography variant="h2">
-                <Typed strings={["Brandon Lee G"]} typeSpeed={40}/>
+            <Grid item lg={3} md={5} xs={8} justify="center" alignItems="center">
+              <Typography variant="h2" align='center'>
+                <Typed strings={["Brandon Lee Gaerlan"]} typeSpeed={40}/>
               </Typography>
             </Grid>
-            <Grid item lg={5} xs={5}>
-            <Typography variant="h4">
+            <Grid item lg={5} md={5} xs={12}>
+            <Typography variant="h5">
               <Typed
                 strings={["Aspiring Software Engineer", "Life-Long Learner", "Focused Problem Solver"]}
                 typeSpeed={40}
