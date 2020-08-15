@@ -22,6 +22,8 @@ import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
+import Typed from 'react-typed';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '640px',
@@ -281,9 +283,13 @@ function WorkExp(props) {
         spacing={1}
         className={classes.sections}
       >
-        <Grid item xs={10} style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
-          <Typography variant="h3" component="h1" >
-            Work Experience
+        <Grid item xs={10}>
+          <Typography variant="h3" component="h1" style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
+            <Typed
+              strings={["Work Experience"]}
+              typeSpeed={40}
+              backSpeed={60}
+            />
           </Typography>
         </Grid>
       </Grid>

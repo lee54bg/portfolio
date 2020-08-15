@@ -23,6 +23,7 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import Typed from 'react-typed';
 
 const drawerWidth = 240;
 
@@ -234,20 +235,22 @@ function Education(props) {
         className={classes.sections}
       >
         <Grid item xs={12}>
-          <Typography variant="h3" component="h1" className={styles.education}>
-            Education
+          <Typography variant="h3" component="h1" style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
+              <Typed
+                strings={["Education"]}
+                typeSpeed={40}
+                backSpeed={60}
+              />
           </Typography>
         </Grid>
-        {
-          isDesktop ? (
-            <Grid item lg={12}>
-              <DesktopTimeLine/ >
-            </Grid>
-          ) : (
-            <MobileTimeLine />
-          )
-        }
       </Grid>
+      {
+        isDesktop ? (
+          <DesktopTimeLine/ >
+        ) : (
+          <MobileTimeLine />
+        )
+      }
     </>
   );
 }

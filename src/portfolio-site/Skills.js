@@ -141,7 +141,7 @@ function Skills(props) {
         className={classes.sections}
       >
         <Grid item xs={12} justify="center" alignItems="center">
-          <Typography variant="h3" component="h1">
+          <Typography variant="h3" component="h1" style={{borderStyle: 'none none solid none', marginBottom: '20px'}}>
             <Typed
                 strings={["Skills"]}
                 typeSpeed={40}
