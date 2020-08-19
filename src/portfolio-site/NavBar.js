@@ -1,59 +1,24 @@
-import React from 'react';
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-
 import {
   Fab,
-  Badge,
-  Grid,
-  Grow,
   IconButton,
-  Paper,
-  Tab,
-  Tabs,
   Tooltip,
   useScrollTrigger,
   Zoom
 } from '@material-ui/core';
 
-import PropTypes from 'prop-types';
-
-import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
-import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import AppsIcon from '@material-ui/icons/Apps';
-import MenuIcon from '@material-ui/icons/Menu';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
-import SaveIcon from '@material-ui/icons/Save';
-import PrintIcon from '@material-ui/icons/Print';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import CloseIcon from '@material-ui/icons/Close';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HomeIcon from '@material-ui/icons/Home';
-
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
-import WorkIcon from '@material-ui/icons/Work';
-import BuildIcon from '@material-ui/icons/Build';
-import SchoolIcon from '@material-ui/icons/School';
-
-
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-const drawerWidth = 70;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,17 +28,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    // width: `calc(100% - ${drawerWidth}px)`,
-    // marginLeft: drawerWidth,
     alignItems: 'center',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: '#b2ebf2',
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -111,30 +66,26 @@ const HtmlTooltip = withStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     border: '1px solid #dadde9',
   },
-}))(Tooltip);
+})) (Tooltip);
 
 const menuItems = [
   {
     listIcon: <HomeIcon />,
     listText: "Home",
-    listPath: "/",
-    // listFunction: titleHome,
+    listPath: "/portfolio",
   },
   {
     listIcon: <AssignmentIndIcon />,
     listText: "About",
     listPath: "/about",
-    // listFunction: titleAbout,
   }, {
     listIcon: <AppsIcon />,
     listText: "Portfolio",
-    listPath: "/portfolio",
-    // listFunction: titlePortfolio,
+    listPath: "/projects",
   }, {
     listIcon: <ContactMailIcon />,
     listText: "Contact",
     listPath: "/contact",
-    // listFunction: titleContact,
   }
 ]
 
@@ -208,18 +159,6 @@ const NavBar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [appDrawerButtons, setAppButtons] = React.useState(true);
   const [title, setTitle] = React.useState('Home');
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleToggle = () => {
-    setOpen(!open);
-  };
 
   function setTextName(name) {
     setTitle(name)

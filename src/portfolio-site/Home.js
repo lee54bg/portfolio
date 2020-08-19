@@ -1,9 +1,8 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   CssBaseline, 
-  Fade,
   Grid,
   Typography,
 } from '@material-ui/core';
@@ -11,6 +10,8 @@ import {
 import Typed from 'react-typed';
 
 import NavBar from './NavBar.js';
+
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,10 +29,6 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(true);
-
-  const handleChange = () => {
-    setChecked(!checked);
-  };
 
   return (
     <>
@@ -64,7 +61,11 @@ const Home = () => {
             </Typography>            
             </Grid>
             <Grid item className={classes.getStarted}>
-              <Button variant="contained" href="/about">Get Started</Button>
+              <Button
+                variant="contained"
+                component={Link}
+                to="/about"            
+              >Get Started</Button>
             </Grid>
           </Grid>
       </div>
